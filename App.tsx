@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { AppScreen, PinStackData } from './types';
-import { HomeFeed } from './screens/HomeFeed';
-import { DecisionView } from './screens/DecisionView';
-import { DeclutteredBoard } from './screens/DeclutteredBoard';
-import { BoardsList } from './screens/BoardsList';
-import { StackDetailView } from './screens/StackDetailView';
-import { MOCK_BOARDS } from './constants';
+import { AppScreen, PinStackData } from './types.ts';
+import { HomeFeed } from './screens/HomeFeed.tsx';
+import { DecisionView } from './screens/DecisionView.tsx';
+import { DeclutteredBoard } from './screens/DeclutteredBoard.tsx';
+import { BoardsList } from './screens/BoardsList.tsx';
+import { StackDetailView } from './screens/StackDetailView.tsx';
+import { MOCK_BOARDS } from './constants.ts';
 
 const App: React.FC = () => {
   const [currentScreen, setCurrentScreen] = useState<AppScreen>(AppScreen.HOME_FEED);

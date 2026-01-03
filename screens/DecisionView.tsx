@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { X, Check } from 'lucide-react';
-import { Pin } from '../types';
+import { Pin } from '../types.ts';
 
 interface DecisionViewProps {
   boardTitle: string;
@@ -13,13 +13,11 @@ export const DecisionView: React.FC<DecisionViewProps> = ({ boardTitle, pins, on
   const [step, setStep] = useState(0);
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
-  // Generate pairs from the provided pins
   const comparisons = [];
   for (let i = 0; i < pins.length - 1; i += 2) {
     comparisons.push({ left: pins[i], right: pins[i + 1] });
   }
 
-  // Fallback if no comparisons possible
   if (comparisons.length === 0) {
     return (
       <div className="fixed inset-0 z-50 bg-white flex flex-col items-center justify-center p-8 text-center">
@@ -49,7 +47,6 @@ export const DecisionView: React.FC<DecisionViewProps> = ({ boardTitle, pins, on
 
   return (
     <div className="fixed inset-0 z-50 bg-white flex flex-col animate-in fade-in duration-300">
-      {/* Header */}
       <div className="px-6 pt-6 pb-2 flex justify-between items-start max-w-5xl mx-auto w-full">
         <div className="flex-1 text-center">
           <div className="flex items-center justify-center gap-2 mb-1">
@@ -67,10 +64,8 @@ export const DecisionView: React.FC<DecisionViewProps> = ({ boardTitle, pins, on
         </button>
       </div>
 
-      {/* Main Comparison Area */}
       <div className="flex-1 flex flex-col justify-center px-4 md:px-12 lg:px-24">
         <div className="flex flex-col sm:flex-row gap-4 md:gap-8 h-[70vh] sm:h-[60vh] max-w-6xl mx-auto w-full">
-          {/* Left Choice */}
           <div 
             onClick={() => handleSelect(currentPair.left.id)}
             className={`
@@ -85,8 +80,6 @@ export const DecisionView: React.FC<DecisionViewProps> = ({ boardTitle, pins, on
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
               alt="Option A" 
             />
-            <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-            
             {selectedId === currentPair.left.id && (
               <div className="absolute inset-0 bg-[#E60023]/20 flex items-center justify-center backdrop-blur-[2px]">
                 <div className="bg-white rounded-full p-5 shadow-2xl animate-in zoom-in-50 duration-300">
@@ -94,13 +87,8 @@ export const DecisionView: React.FC<DecisionViewProps> = ({ boardTitle, pins, on
                 </div>
               </div>
             )}
-            
-            <div className="absolute bottom-6 left-6 right-6">
-                <span className="bg-white/90 backdrop-blur-md px-4 py-2 rounded-full text-xs font-extrabold uppercase tracking-widest text-gray-900 shadow-sm opacity-0 group-hover:opacity-100 transition-opacity">Option A</span>
-            </div>
           </div>
 
-          {/* Right Choice */}
           <div 
             onClick={() => handleSelect(currentPair.right.id)}
             className={`
@@ -115,8 +103,6 @@ export const DecisionView: React.FC<DecisionViewProps> = ({ boardTitle, pins, on
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
               alt="Option B" 
             />
-            <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-
             {selectedId === currentPair.right.id && (
               <div className="absolute inset-0 bg-[#E60023]/20 flex items-center justify-center backdrop-blur-[2px]">
                 <div className="bg-white rounded-full p-5 shadow-2xl animate-in zoom-in-50 duration-300">
@@ -124,25 +110,15 @@ export const DecisionView: React.FC<DecisionViewProps> = ({ boardTitle, pins, on
                 </div>
               </div>
             )}
-
-            <div className="absolute bottom-6 left-6 right-6">
-                <span className="bg-white/90 backdrop-blur-md px-4 py-2 rounded-full text-xs font-extrabold uppercase tracking-widest text-gray-900 shadow-sm opacity-0 group-hover:opacity-100 transition-opacity">Option B</span>
-            </div>
           </div>
         </div>
       </div>
 
-      {/* Footer Text */}
       <div className="pb-16 px-8 text-center max-w-xl mx-auto">
-        <p className="text-xl sm:text-2xl font-bold text-gray-900 tracking-tight">
-          Which one stays?
-        </p>
-        <p className="text-sm sm:text-base text-gray-500 mt-2 font-medium">
-          Choose the idea that resonates most with your vision. We'll help you declutter the rest.
-        </p>
+        <p className="text-xl sm:text-2xl font-bold text-gray-900 tracking-tight">Which one stays?</p>
+        <p className="text-sm sm:text-base text-gray-500 mt-2 font-medium">Choose the idea that resonates most with your vision.</p>
       </div>
 
-      {/* Progress Bar */}
       <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-gray-100">
          <div 
             className="h-full bg-[#E60023] transition-all duration-500 ease-out"
