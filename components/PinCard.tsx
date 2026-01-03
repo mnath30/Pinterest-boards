@@ -1,6 +1,6 @@
 import React from 'react';
 import { MoreHorizontal } from 'lucide-react';
-import { Pin } from '../types';
+import { Pin } from '../types.ts';
 
 interface PinCardProps {
   pin: Pin;

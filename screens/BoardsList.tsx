@@ -1,7 +1,7 @@
 import React from 'react';
 import { Settings, Plus, Sparkles } from 'lucide-react';
-import { MOCK_BOARDS } from '../constants';
-import { Navigation } from '../components/Navigation';
+import { MOCK_BOARDS } from '../constants.ts';
+import { Navigation } from '../components/Navigation.tsx';
 
 interface BoardsListProps {
   onBoardClick: (boardId: string) => void;

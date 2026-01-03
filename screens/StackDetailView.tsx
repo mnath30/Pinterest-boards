@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { X, Heart, ChevronDown } from 'lucide-react';
-import { PinStackData } from '../types';
+import { PinStackData } from '../types.ts';
 
 interface StackDetailViewProps {
   stack: PinStackData | null;

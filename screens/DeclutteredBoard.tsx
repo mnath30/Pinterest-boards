@@ -1,8 +1,8 @@
 import React from 'react';
 import { ChevronLeft, MoreHorizontal, Filter, Plus, Star, Sparkles } from 'lucide-react';
-import { MOCK_BOARDS } from '../constants';
-import { PinStack } from '../components/PinStack';
-import { PinStackData } from '../types';
+import { MOCK_BOARDS } from '../constants.ts';
+import { PinStack } from '../components/PinStack.tsx';
+import { PinStackData } from '../types.ts';
 
 interface DeclutteredBoardProps {
   boardId: string | null;
