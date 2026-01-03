@@ -34,9 +34,9 @@ export const StackDetailView: React.FC<StackDetailViewProps> = ({ stack, onClose
   const visiblePins = stack.pins.filter(p => !removedPins.has(p.id));
 
   return (
-    <div className="fixed inset-0 z-50 bg-white animate-in slide-in-from-bottom-10 duration-300 flex flex-col">
+    <div className="fixed inset-0 z-50 bg-white animate-in slide-in-from-bottom-10 duration-400 flex flex-col">
       {/* Header */}
-      <div className="px-4 py-4 flex items-center justify-between border-b border-gray-100">
+      <div className="px-4 py-4 flex items-center justify-between border-b border-gray-50">
         <button 
           onClick={onClose}
           className="p-2 -ml-2 hover:bg-gray-100 rounded-full transition-colors"
@@ -45,40 +45,38 @@ export const StackDetailView: React.FC<StackDetailViewProps> = ({ stack, onClose
         </button>
         <div className="text-center">
             <h2 className="text-lg font-bold text-gray-900">{stack.title}</h2>
-            <p className="text-xs text-gray-500">{visiblePins.length} ideas</p>
+            <p className="text-xs font-semibold text-gray-400">{visiblePins.length} ideas</p>
         </div>
-        <div className="w-10" /> {/* Spacer for centering */}
+        <div className="w-10" />
       </div>
 
-      {/* Grid */}
       <div className="flex-1 overflow-y-auto p-4 pb-20">
         <div className="columns-2 gap-4">
           {visiblePins.map((pin) => (
-            <div key={pin.id} className="relative mb-4 break-inside-avoid group">
-              <div className="relative rounded-2xl overflow-hidden bg-gray-100">
+            <div key={pin.id} className="relative mb-5 break-inside-avoid group">
+              <div className="relative rounded-[1.5rem] overflow-hidden bg-gray-50 shadow-sm border border-gray-100">
                 <img 
                   src={pin.imageUrl} 
                   alt={pin.title} 
                   className="w-full h-auto object-cover"
                 />
                 
-                {/* Actions Overlay */}
-                <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/60 to-transparent flex justify-between items-center opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-200">
+                <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/50 to-transparent flex justify-between items-center opacity-100 transition-opacity duration-200">
                     <button 
                       onClick={(e) => removePin(pin.id, e)}
-                      className="bg-white/90 p-2 rounded-full hover:bg-white text-gray-900 shadow-sm transition-transform active:scale-90"
+                      className="bg-white/95 p-2 rounded-full hover:bg-white text-gray-900 shadow-md transition-transform active:scale-90"
                     >
                         <X size={18} />
                     </button>
                     <button 
                       onClick={(e) => toggleLike(pin.id, e)}
-                      className={`p-2 rounded-full shadow-sm transition-transform active:scale-90 ${likedPins.has(pin.id) ? 'bg-red-500 text-white' : 'bg-white/90 text-gray-900 hover:bg-white'}`}
+                      className={`p-2 rounded-full shadow-md transition-transform active:scale-90 ${likedPins.has(pin.id) ? 'bg-[#E60023] text-white' : 'bg-white/95 text-gray-900 hover:bg-white'}`}
                     >
                         <Heart size={18} className={likedPins.has(pin.id) ? "fill-current" : ""} />
                     </button>
                 </div>
               </div>
-              <p className="mt-2 text-xs font-medium text-gray-900 px-1 truncate">{pin.title}</p>
+              <p className="mt-2 text-[12px] font-bold text-gray-900 px-2 truncate leading-tight">{pin.title}</p>
             </div>
           ))}
         </div>

@@ -1,28 +1,37 @@
 import { Pin, Board, PinStackData } from './types';
 
-// Helper to generate consistent images
+// Helper to generate consistent, high-quality aesthetic images
 const getImg = (id: number, width: number, height: number) => 
   `https://picsum.photos/id/${id}/${width}/${height}`;
 
+// A selection of aesthetic IDs: 
+// 10: landscape, 28: nature, 43: architecture, 54: landscape, 75: plants, 
+// 122: interior, 164: architecture, 175: watch, 182: plants, 191: computer
+// 204: fashion/people, 250: camera, 445: fashion, 674: interior
+
 // --- GENERIC PINS FOR FEED ---
 export const MOCK_PINS: Pin[] = [
-  { id: '1', title: 'Minimalist Shelf', imageUrl: getImg(12, 400, 600), heightRatio: 1.5 },
-  { id: '2', title: 'Cozy Corner', imageUrl: getImg(24, 400, 400), heightRatio: 1.0 },
-  { id: '3', title: 'Plants', imageUrl: getImg(45, 400, 500), heightRatio: 1.25 },
-  { id: '4', title: 'Lighting', imageUrl: getImg(56, 400, 650), heightRatio: 1.6 },
-  { id: '5', title: 'Textures', imageUrl: getImg(68, 400, 450), heightRatio: 1.1 },
-  { id: '6', title: 'Ceramics', imageUrl: getImg(76, 400, 550), heightRatio: 1.3 },
-  { id: '7', title: 'Woodwork', imageUrl: getImg(88, 400, 400), heightRatio: 1.0 },
-  { id: '8', title: 'Abstract Art', imageUrl: getImg(91, 400, 600), heightRatio: 1.5 },
+  { id: '1', title: 'Modern Minimalist Living', imageUrl: getImg(674, 800, 1200), heightRatio: 1.5 },
+  { id: '2', title: 'Ethereal Forest Light', imageUrl: getImg(28, 800, 800), heightRatio: 1.0 },
+  { id: '3', title: 'Urban Architecture Lines', imageUrl: getImg(43, 800, 1000), heightRatio: 1.25 },
+  { id: '4', title: 'Serene Morning Coffee', imageUrl: getImg(429, 800, 1100), heightRatio: 1.37 },
+  { id: '5', title: 'Scandinavian Textures', imageUrl: getImg(122, 800, 1000), heightRatio: 1.25 },
+  { id: '6', title: 'Botanical Sanctuary', imageUrl: getImg(182, 800, 1200), heightRatio: 1.5 },
+  { id: '7', title: 'Sunset Coastal Drive', imageUrl: getImg(54, 800, 800), heightRatio: 1.0 },
+  { id: '8', title: 'Artistic Shadows', imageUrl: getImg(91, 800, 1200), heightRatio: 1.5 },
+  { id: '9', title: 'Linen Fashion Style', imageUrl: getImg(445, 800, 1100), heightRatio: 1.37 },
+  { id: '10', title: 'Golden Hour Peak', imageUrl: getImg(10, 800, 800), heightRatio: 1.0 },
+  { id: '11', title: 'Abstract Design Elements', imageUrl: getImg(158, 800, 1200), heightRatio: 1.5 },
+  { id: '12', title: 'Rustic Studio Space', imageUrl: getImg(164, 800, 1000), heightRatio: 1.25 },
 ];
 
 // --- HELPER TO CREATE STACKS ---
 const createStack = (id: string, title: string, startImgId: number, count: number): PinStackData => {
   const pins: Pin[] = Array.from({ length: count }).map((_, i) => ({
     id: `${id}-pin-${i}`,
-    title: `${title} Option ${i + 1}`,
-    imageUrl: getImg(startImgId + i, 400, 400 + (i % 2) * 100), // Vary aspect ratio slightly
-    heightRatio: 1 + (i % 2) * 0.3
+    title: `${title} Style ${i + 1}`,
+    imageUrl: getImg(startImgId + (i * 3), 800, 800), // High quality square
+    heightRatio: 1.0
   }));
   return {
     id,
@@ -38,15 +47,15 @@ const createStack = (id: string, title: string, startImgId: number, count: numbe
 export const MOCK_BOARDS: Board[] = [
   {
     id: 'bedroom-makeover',
-    title: 'Bedroom Makeover',
+    title: 'Bedroom Sanctuary',
     pinCount: 42,
     lastUpdated: '2h ago',
-    coverImages: [getImg(102, 300, 300), getImg(130, 300, 300), getImg(132, 300, 300)],
+    coverImages: [getImg(674, 600, 600), getImg(122, 600, 600), getImg(111, 600, 600)],
     strongestPins: [
-      { id: 'f1', title: 'Main Inspiration', imageUrl: getImg(102, 600, 800), heightRatio: 1.33 },
-      { id: 'f2', title: 'Color Palette', imageUrl: getImg(110, 400, 300), heightRatio: 0.75 },
-      { id: 'f3', title: 'Texture Idea', imageUrl: getImg(111, 400, 400), heightRatio: 1.0 },
-      { id: 'f4', title: 'Lighting Match', imageUrl: getImg(112, 400, 500), heightRatio: 1.25 },
+      { id: 'f1', title: 'Main Inspiration', imageUrl: getImg(674, 800, 1000), heightRatio: 1.25 },
+      { id: 'f2', title: 'Textural Layers', imageUrl: getImg(122, 800, 600), heightRatio: 0.75 },
+      { id: 'f3', title: 'Morning Light', imageUrl: getImg(182, 800, 800), heightRatio: 1.0 },
+      { id: 'f4', title: 'Evening Ambiance', imageUrl: getImg(112, 800, 1000), heightRatio: 1.25 },
     ],
     sections: [
       {
@@ -69,20 +78,20 @@ export const MOCK_BOARDS: Board[] = [
   },
   {
     id: 'summer-outfit',
-    title: 'Summer Outfit',
+    title: 'Coastal Summer',
     pinCount: 28,
     lastUpdated: '1d ago',
-    coverImages: [getImg(200, 300, 300), getImg(201, 300, 300), getImg(202, 300, 300)],
+    coverImages: [getImg(445, 600, 600), getImg(20, 600, 600), getImg(10, 600, 600)],
     strongestPins: [
-      { id: 'so1', title: 'Vibe Check', imageUrl: getImg(200, 600, 800), heightRatio: 1.33 },
-      { id: 'so2', title: 'Accessory', imageUrl: getImg(205, 400, 400), heightRatio: 1.0 },
-      { id: 'so3', title: 'Shoes', imageUrl: getImg(208, 400, 500), heightRatio: 1.25 },
+      { id: 'so1', title: 'Summer Vibe', imageUrl: getImg(445, 800, 1000), heightRatio: 1.25 },
+      { id: 'so2', title: 'Essential Accessory', imageUrl: getImg(175, 800, 800), heightRatio: 1.0 },
+      { id: 'so3', title: 'Beach Footwear', imageUrl: getImg(208, 800, 1000), heightRatio: 1.25 },
     ],
     sections: [
       {
         title: 'Wardrobe',
         stacks: [
-          createStack('s7', 'Linen Dresses', 210, 6),
+          createStack('s7', 'Linen Pieces', 210, 6),
           createStack('s8', 'Sandals', 220, 4),
         ]
       },
@@ -96,25 +105,25 @@ export const MOCK_BOARDS: Board[] = [
     ]
   },
   {
-    id: 'kitchen-reno',
-    title: 'Kitchen Reno',
+    id: 'modern-architecture',
+    title: 'Modern Forms',
     pinCount: 156,
     lastUpdated: '1w ago',
-    coverImages: [getImg(300, 300, 300), getImg(301, 300, 300), getImg(302, 300, 300)],
+    coverImages: [getImg(43, 600, 600), getImg(164, 600, 600), getImg(12, 600, 600)],
     strongestPins: [
-      { id: 'k1', title: 'Layout', imageUrl: getImg(300, 600, 800), heightRatio: 1.33 },
-      { id: 'k2', title: 'Tile', imageUrl: getImg(305, 400, 400), heightRatio: 1.0 },
+      { id: 'k1', title: 'Concrete Forms', imageUrl: getImg(43, 800, 1000), heightRatio: 1.25 },
+      { id: 'k2', title: 'Glass & Steel', imageUrl: getImg(164, 800, 800), heightRatio: 1.0 },
     ],
     sections: [
       {
-        title: 'Cabinets',
+        title: 'Structural Ideas',
         stacks: [
-          createStack('s11', 'Green Cabinets', 310, 12),
-          createStack('s12', 'Brass Handles', 330, 8),
+          createStack('s11', 'Brutalist Concrete', 310, 12),
+          createStack('s12', 'Curved Glass', 330, 8),
         ]
       }
     ]
   }
 ];
 
-export const BEDROOM_PINS = MOCK_BOARDS[0].strongestPins; // Backward compatibility fallback
+export const BEDROOM_PINS = MOCK_BOARDS[0].strongestPins;

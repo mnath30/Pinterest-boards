@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, Search, Plus, MessageCircle, User } from 'lucide-react';
+import { Home, Search, Plus, MessageCircle } from 'lucide-react';
 
 interface NavigationProps {
   onProfileClick?: () => void;
@@ -18,13 +18,19 @@ export const Navigation: React.FC<NavigationProps> = ({
         className="flex flex-col items-center gap-1 cursor-pointer"
         onClick={onHomeClick}
       >
-        <Home size={26} className={activeTab === 'home' ? "text-gray-900 fill-current" : "text-gray-400"} />
+        <Home 
+          size={26} 
+          className={activeTab === 'home' ? "text-gray-900" : "text-gray-400"} 
+          strokeWidth={activeTab === 'home' ? 2.5 : 2}
+        />
       </div>
       <div className="flex flex-col items-center gap-1 cursor-pointer">
         <Search size={26} className="text-gray-400" />
       </div>
       <div className="flex flex-col items-center gap-1 cursor-pointer">
-        <Plus size={26} className="text-gray-400" />
+        <div className="p-1">
+          <Plus size={26} className="text-gray-400" />
+        </div>
       </div>
       <div className="flex flex-col items-center gap-1 cursor-pointer">
         <MessageCircle size={26} className="text-gray-400" />

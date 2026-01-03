@@ -13,53 +13,50 @@ interface HomeFeedProps {
 }
 
 export const HomeFeed: React.FC<HomeFeedProps> = ({ onOpenCard, onOpenBoard, onProfileClick, onBoardsClick }) => {
-  // Split pins into two columns for masonry effect
-  const leftColPins = MOCK_PINS.filter((_, i) => i % 2 === 0);
-  const rightColPins = MOCK_PINS.filter((_, i) => i % 2 !== 0);
-
   return (
     <div className="min-h-screen bg-white pb-24">
-      {/* Top Bar */}
-      <div className="sticky top-0 z-40 bg-white/95 backdrop-blur-md px-4 py-3 flex items-center justify-center border-b border-transparent">
-        <div className="flex gap-6">
-          <span className="text-base font-semibold text-gray-900 border-b-2 border-black pb-1 cursor-pointer">All</span>
+      {/* Top Bar with Brand Logo */}
+      <div className="sticky top-0 z-40 bg-white/95 backdrop-blur-md px-4 py-3 flex items-center border-b border-transparent shadow-sm">
+        <div className="w-8 h-8 mr-4 cursor-pointer hover:opacity-80 transition-opacity">
+          <img 
+            src="https://upload.wikimedia.org/wikipedia/commons/0/08/Pinterest-logo.png" 
+            alt="Pinterest" 
+            className="w-full h-full object-contain"
+          />
+        </div>
+        <div className="flex gap-6 flex-1 justify-center sm:justify-start -ml-12 sm:ml-0">
+          <span className="text-base font-bold text-gray-900 relative pb-1 cursor-default">
+            For you
+            <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-gray-900 rounded-full"></div>
+          </span>
           <span 
             onClick={onBoardsClick}
-            className="text-base font-medium text-gray-500 cursor-pointer hover:text-gray-900 transition-colors"
+            className="text-base font-semibold text-gray-500 cursor-pointer hover:text-gray-900 transition-colors"
           >
             Boards
           </span>
         </div>
       </div>
 
-      {/* Recent Activity Section - Now navigates to Board */}
       <RecentBoards onBoardClick={onOpenBoard} />
 
-      {/* Masonry Grid */}
-      <div className="px-2 pt-0">
-        <h3 className="px-2 mb-3 text-sm font-semibold text-gray-900">More ideas for you</h3>
-        <div className="flex gap-2">
-          {/* Column 1 */}
-          <div className="flex-1 flex flex-col">
-            {leftColPins.map((pin, index) => (
-              <React.Fragment key={pin.id}>
-                {/* Feed Card shortcut navigates to Decision/Refine */}
-                {index === 1 && <BoardProgressCard onClick={onOpenCard} />}
-                <PinCard pin={pin} />
-              </React.Fragment>
-            ))}
-          </div>
-
-          {/* Column 2 */}
-          <div className="flex-1 flex flex-col">
-             {rightColPins.map((pin) => (
-                <PinCard key={pin.id} pin={pin} />
-             ))}
-          </div>
+      <div className="px-4 pt-4">
+        <h3 className="mb-4 text-sm font-bold text-gray-900">Recommended for you</h3>
+        
+        {/* Responsive Masonry Layout */}
+        <div className="columns-2 sm:columns-3 md:columns-4 lg:columns-5 xl:columns-6 gap-4">
+          <BoardProgressCard onClick={onOpenCard} />
+          {MOCK_PINS.map((pin) => (
+            <PinCard key={pin.id} pin={pin} />
+          ))}
+          {/* Repeat some pins to fill larger screens for demo */}
+          {MOCK_PINS.slice(0, 8).map((pin) => (
+            <PinCard key={`${pin.id}-copy`} pin={pin} />
+          ))}
         </div>
       </div>
 
-      <Navigation onProfileClick={onProfileClick} />
+      <Navigation onProfileClick={onProfileClick} activeTab="home" />
     </div>
   );
 };
